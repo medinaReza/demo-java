@@ -40,9 +40,11 @@ public class IndexController {
       if (bookname != null) {
         // Filter by book name
         query = "SELECT * FROM Books WHERE name LIKE ?";
+        paremeters.add("%"+bookname+"%");
       } else if (bookauthor != null) {
         // Filter by book author
         query = "SELECT * FROM Books WHERE author LIKE ?";
+        paremeters.add("%"+bookauthor+"%");
       } else if (bookread != null) {
         // Filter by if the book has been read or not
         Integer read = bookread ? 1 : 0;
