@@ -30,7 +30,6 @@ public class IndexController {
 
     PreparedStatement statement = null;
     List<String> parameters = new ArrayList<>();
-
     try {
       // Init connection to DB
       connection = DriverManager.getConnection(Application.connectionString);
