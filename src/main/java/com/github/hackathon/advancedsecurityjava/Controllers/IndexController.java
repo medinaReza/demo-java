@@ -27,7 +27,7 @@ public class IndexController {
       @RequestParam(name = "author", required = false) String bookauthor,
       @RequestParam(name = "read", required = false) Boolean bookread) {
     List<Book> books = new ArrayList<Book>();
-
+    List<String> parameters = new ArrayList<String>();
     Statement statement = null;
 
     try {
@@ -40,16 +40,16 @@ public class IndexController {
       if (bookname != null) {
         // Filter by book name
         query = "SELECT * FROM Books WHERE name LIKE ?";
-        paremeters.add("%"+bookname+"%");
+        paremeters.add("%" + bookname + "%");
       } else if (bookauthor != null) {
         // Filter by book author
         query = "SELECT * FROM Books WHERE author LIKE ?";
-        paremeters.add("%"+bookauthor+"%");
+        paremeters.add("%" + bookauthor + "%");
       } else if (bookread != null) {
         // Filter by if the book has been read or not
         Integer read = bookread ? 1 : 0;
         query = "SELECT * FROM Books WHERE read = ?";
-		parameters.add(read.toString());
+		    parameters.add(read.toString());
       } else {
         // All books
         query = "SELECT * FROM Books";
@@ -57,7 +57,7 @@ public class IndexController {
 
       statement = connection.prepareStatement(query);
 	  int index = 1;
-	  for(String paremeter : paremeter){
+	  for(String parameter : parameters){
 		statement.setString(index,parameter);
 		index += 1;		
 	  }
